@@ -1,0 +1,1 @@
+export let ChartParent={margin:"45pt",boxShadow: "3px 3px 5px 6px #ccc",borderRadius:"7pt",padding:"5pt",width:"40%",justifyContent:"center"}

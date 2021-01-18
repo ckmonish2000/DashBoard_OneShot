@@ -1,0 +1,11 @@
+input[type="button"]
+{
+    width:120px;
+    height:60px;
+    margin-left:35px;
+    display:block;
+    background-color:gray;
+    color:white;
+    border: none;
+    outline:none;
+}
