@@ -30,7 +30,7 @@ export default function Getcollege(props) {
         body: JSON.stringify({collegeName:SearchVal})
       }) .then(res=>res.json())
       .then(data=>setSearchData(data))
-      .catch(err=>console.log(err))
+      .catch(err=>err)
    
     }
    

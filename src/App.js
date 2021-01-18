@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateCollege from "./components/createCollege/createCollege"
 import {dburl} from "./components/dburl"
 export default function App() {
-  console.log(dburl)
   return (
    <main>
      <Switch>

@@ -35,7 +35,7 @@ function App(props) {
     setFrequency(res)
     setCourses(res2)
     })
-    .catch(err=>console.log(err))
+    .catch(err=>err)
  
   }, [])
 

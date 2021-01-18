@@ -28,12 +28,11 @@ const PostData=()=>{
         method: "POST",
         body: JSON.stringify(FieldInput),
         headers: {"Content-type": "application/json; charset=UTF-8"}
-      }).then(response =>GoBack()).catch(err => console.log(err));
+      }).then(response =>GoBack()).catch(err =>err);
       
 }
 
 const dateHandler=(date, dateString)=>{
-    console.log(dateString)
     setFieldInput({...FieldInput, yearFounded: dateString})
   }
 const changeHandler = e => {
