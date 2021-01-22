@@ -12,7 +12,7 @@ export default function Getcollege(props) {
   
     const [SearchVal, setSearchVal] = useState("")
     const [SearchData, setSearchData] = useState([])
-    
+    const [noResult, setnoResult] = useState(false)
     const GoBack=()=>{props.history.goBack()}
 
     const OnClick=()=>{ 
@@ -29,8 +29,8 @@ export default function Getcollege(props) {
         referrerPolicy: 'no-referrer', 
         body: JSON.stringify({collegeName:SearchVal})
       }) .then(res=>res.json())
-      .then(data=>setSearchData(data))
-      .catch(err=>err)
+      .then(data=>{if(data.length===0){setnoResult(true)}else{setnoResult(false)};setSearchData(data)})
+      .catch(err=>props.history.push("/error"))
    
     }
    
@@ -54,7 +54,7 @@ export default function Getcollege(props) {
         <div>
            <Back/>
             <div style={root}>
-            <Input style={field} placeholder="Enter College Name" onChange={OnChange}/>
+            <Input style={field}  style={{width:600,marginRight:20}} placeholder="Enter College Name" onChange={OnChange}/>
             <Tooltip title="search">
             <Button type="primary" shape="circle" icon={<SearchOutlined />} onClick={OnClick} />
             </Tooltip>
@@ -75,6 +75,8 @@ export default function Getcollege(props) {
         <div><label style={label}>Courses: </label><span style={value}>{SearchData[0]?.courses}</span></div>
        
         </Card>}
+
+        {noResult && <h1 style={{textAlign:"center",color:"grey",opacity:0.7,marginTop:"50pt"}}>No Such College Exsists <a href="/createcollege">👉Create One here.........</a></h1>}
 
 
            

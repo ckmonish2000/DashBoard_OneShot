@@ -9,5 +9,5 @@ borderColor:"#D4D4D4"
 
 export let root={
   width:"100pt",
-  margin:"0 33%"
+  margin:"0px 220%"
 }

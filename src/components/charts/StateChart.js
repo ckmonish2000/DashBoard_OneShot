@@ -24,7 +24,14 @@ export default function StateChart(props) {
            'rgba(255, 159, 64, 0.2)'
        ]}]
    }}
-   options={{ maintainAspectRatio: false }}
+   options={{
+     maintainAspectRatio: false,
+     onClick:(evt,item)=>{if(typeof Object.keys(Frequency)[item[0]?._index]!=="undefined"){
+       props.setState(Object.keys(Frequency)[item[0]?._index])
+     }
+    
+    }
+   }}
    />
  </div>
     )

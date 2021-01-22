@@ -21,3 +21,48 @@ a:hover {
       -webkit-mask-position: -50%;
     }
   }
+
+
+  
+
+.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
+}
+
+.page_404  img{ width:100%;}
+
+.four_zero_four_bg{
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  width: 500pt;
+  background-position: center;
+  margin-left: auto;
+  margin-right: auto;
+ }
+ 
+ 
+ .four_zero_four_bg h1{
+ font-size:80px;
+ }
+ 
+  .four_zero_four_bg h3{
+			 font-size:80px;
+			 }
+			 
+			 .link_404{			 
+	color: #fff!important;
+    padding: 10px 20px;
+    background: #39ac31;
+    margin: 20px 0;
+    text-align: center;
+    font-size: x-large;
+    display: inline-block;}
+  .contant_box_404{ margin-top:-50px;}
+  
+
+  .errorTxt{
+  position: absolute;
+  right: 500pt;
+    font-weight: 500;
+    font-size: larger;
+    color: #ff3333;
+  }

@@ -3,9 +3,13 @@ import {  Table, Tag, Space  } from "antd"
 import {TableCard} from "./styles"
 import QueueAnim from 'rc-queue-anim';
 
-export default function CollegeTable({data}) {
+export default function CollegeTable({data,State}) {
     const { Column, ColumnGroup } = Table;
-
+ 
+    data=data.filter(
+      val=>{
+        return val.state===State
+      })
     // Table Heading
     const TableHead=()=><h1 style={{textAlign:"left"}}>List Of Colleges</h1>
 

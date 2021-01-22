@@ -22,14 +22,16 @@ export default function CreateCollege(props) {
 
 const GoBack=()=>{props.history.goBack()}
 const PostData=()=>{
-    
-
+  if(FieldInput.college_name!=="" || FieldInput.yearFounded!=="" || FieldInput.city!=="" || FieldInput.state!=="" || FieldInput.country!=="" || FieldInput.No_Of_Students!==0 ||FieldInput.courses.length!==0){
+   
     fetch(`${dburl}/college/createcollege`, {
         method: "POST",
         body: JSON.stringify(FieldInput),
         headers: {"Content-type": "application/json; charset=UTF-8"}
-      }).then(response =>GoBack()).catch(err =>err);
-      
+      }).then(response =>{alert("college was created");GoBack()}).catch(err =>props.history.push("/error"));}
+      else{
+        alert("Do Not Leave Anything Blank!")
+      }
 }
 
 const dateHandler=(date, dateString)=>{
@@ -39,8 +41,8 @@ const changeHandler = e => {
     setFieldInput({...FieldInput, [e.target.name]: e.target.value})
  }
     return (
-  <div>
-      <div style={{display:"flex"}}>
+  <div style={{width:"fit-content"}}>
+     
           <div style={{display:"flex",margin:10}}>
     <button
     className="btn" 
@@ -49,9 +51,9 @@ const changeHandler = e => {
      ><img src="https://img.icons8.com/carbon-copy/2x/back.png" style={{width:"30pt",margin:"10pt"}}/></button>
       <h1 style={{margin:"10pt",opacity:0.9}}>Go Back</h1>
     </div>
-     
-    </div>
-    <h1 style={{textAlign:"center",opacity:0.9}}>New College Info</h1>
+   
+  
+   
   <div style={root}>
     <Input placeholder="Institution Name" name="college_name" style={field} onChange={changeHandler} />            
     <Space direction="horizontal">
@@ -62,9 +64,9 @@ const changeHandler = e => {
     <Input placeholder="Country" name="country" style={field} onChange={changeHandler}/>            
     <Input placeholder="No_Of_Students" name="No_Of_Students" style={field} onChange={changeHandler}/>            
     <Input placeholder="Courses" name="courses" style={field} onChange={changeHandler}/>  
-   
+  
         </div>
-         <Button style={{margin:"20px 60%"}} onClick={PostData}>Create college</Button>
+         <Button style={{position:"absolute",right:"33%"}} onClick={PostData}>Create college</Button>
          </div>
     )
 }
