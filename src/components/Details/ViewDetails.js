@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {  Table, Tag, Space, Button,Modal  } from "antd"
+import {  Table, Tag, Space, Button,Modal, Input  } from "antd"
 import { dburl } from '../dburl';
 import "./styles.css"
 export default function ViewDetails(props) {
@@ -13,6 +13,18 @@ export default function ViewDetails(props) {
     const [collegeInfo, setcollegeInfo] = useState([])
     const [CollegeStudents, setCollegeStudents] = useState([])
     const [ModalVisible, setModalVisible] = useState(false)
+const initstate={
+    fname:"",
+    lname:"",
+    batchYear:0,
+    skills:[]
+
+}
+  const [FieldInput, setFieldInput] = useState(initstate);
+
+const changeHandler = e => {
+    setFieldInput({...FieldInput, [e.target.name]: e.target.value})
+ }
    useEffect(() => {
     const x=location?.state.data.filter(e=>{
         return e._id===location.state.id
@@ -32,7 +44,7 @@ export default function ViewDetails(props) {
     <Button style={{float:"right"}} onClick={()=>setModalVisible(true)}>Add New Student</Button>
     </h1></div>}
 
-
+    console.log(FieldInput)
     return (
         <div>
 
@@ -68,8 +80,24 @@ export default function ViewDetails(props) {
 
 
     {/* Modal code */}
-            <Modal title="welcome" visible={ModalVisible} onOk={()=>setModalVisible(false)} onCancel={()=>setModalVisible(false)}>
-                <p>hello sir</p>
+            <Modal title="Add New Student" visible={ModalVisible} onOk={()=>{
+                fetch(`${dburl}/student/createstudent`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name:FieldInput.fname+" "+FieldInput.lname,
+                        batchYear:FieldInput.batchYear,
+                        college_id:collegeInfo._id,
+                        skills:FieldInput.skills
+                    }),
+                    headers: {"Content-type": "application/json; charset=UTF-8"}
+                  })
+                .then(val=>{setModalVisible(false);setFieldInput(initstate);alert("student have been added")})
+                .catch(err=>console.log(err))
+            }} onCancel={()=>setModalVisible(false)}>
+                <Input placeholder="Student First Name" name="fname" className="IP" onChange={changeHandler} type="text"/>
+                <Input placeholder="Student Last Name" name="lname" className="IP" onChange={changeHandler} type="text"/>
+                <Input placeholder="Batch" name="batchYear" className="IP" onChange={changeHandler} type="number"/>
+                <Input placeholder="Skills (separate each skill with a ,)" name="skills" className="IP" onChange={changeHandler}/>
             </Modal>
 
         </div>
