@@ -16,7 +16,7 @@ export default function ViewDetails(props) {
 const initstate={
     fname:"",
     lname:"",
-    batchYear:0,
+    batchYear:null,
     skills:[]
 
 }
@@ -33,7 +33,7 @@ const changeHandler = e => {
     fetch(`${dburl}/student/${x[0]?._id}`)
     .then(e=>e.json())
     .then(val=>setCollegeStudents(val))
-    .catch(err=>console.log(err))
+    .catch(err=>props.history.push("/error"))
    }, [])
 
     // Table
@@ -92,12 +92,12 @@ const changeHandler = e => {
                     headers: {"Content-type": "application/json; charset=UTF-8"}
                   })
                 .then(val=>{setModalVisible(false);setFieldInput(initstate);alert("student have been added")})
-                .catch(err=>console.log(err))
-            }} onCancel={()=>setModalVisible(false)}>
-                <Input placeholder="Student First Name" name="fname" className="IP" onChange={changeHandler} type="text"/>
-                <Input placeholder="Student Last Name" name="lname" className="IP" onChange={changeHandler} type="text"/>
-                <Input placeholder="Batch" name="batchYear" className="IP" onChange={changeHandler} type="number"/>
-                <Input placeholder="Skills (separate each skill with a ,)" name="skills" className="IP" onChange={changeHandler}/>
+                .catch(err=>props.history.push("/error"))
+            }} onCancel={()=>{setModalVisible(false);setFieldInput(initstate);}}>
+                <Input placeholder="Student First Name" name="fname" className="IP" value={FieldInput.fname} onChange={changeHandler} type="text"/>
+                <Input placeholder="Student Last Name" name="lname" className="IP" onChange={changeHandler} type="text" value={FieldInput.lname}/>
+                <Input placeholder="Batch" name="batchYear" className="IP" onChange={changeHandler} type="number" value={FieldInput.batchYear}/>
+                <Input placeholder="Skills (separate each skill with a ,)" name="skills" className="IP" onChange={changeHandler} value={FieldInput.skills}/>
             </Modal>
 
         </div>
