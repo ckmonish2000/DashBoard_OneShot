@@ -1,17 +1,20 @@
 import React from 'react'
-import {  Table, Tag, Space  } from "antd"
+import {  Table, Tag, Space, Button  } from "antd"
 import {TableCard} from "./styles"
 import QueueAnim from 'rc-queue-anim';
 
-export default function CollegeTable({data,State}) {
+export default function CollegeTable({data,State,Reset}) {
     const { Column, ColumnGroup } = Table;
  
+  if(State!==""){
     data=data.filter(
       val=>{
         return val.state===State
       })
+  }
     // Table Heading
-    const TableHead=()=><h1 style={{textAlign:"left"}}>List Of Colleges</h1>
+    const TableHead=()=>{return State===""?<h1 style={{textAlign:"left"}}>List Of Colleges </h1>:
+      <h1 style={{textAlign:"left"}}>Colleges From {State.toUpperCase()}<Button onClick={Reset} style={{float:"right"}}>Reset</Button></h1>}
 
     // Courses Tag
     let Tager=tags=>(
@@ -25,7 +28,15 @@ export default function CollegeTable({data,State}) {
           }
         </>
       )
+    
 
+
+    let ViewDetailBtn= val=>{
+      return(
+      <Button onClick={()=>console.log(val)}>
+        View Details
+        </Button>)
+    }
     return (
     <div style={TableCard} >
             
@@ -33,7 +44,6 @@ export default function CollegeTable({data,State}) {
     title={TableHead}
     pagination={{pageSize:3}}
     loading={data.length===0?true:false}> 
-      <Column title="College ID" dataIndex="_id"/>
       <Column title="College Name" dataIndex="name"/>
       <Column title="Student Strength" dataIndex="No_Of_Students" />
       <Column title="Country" dataIndex="country" />
@@ -45,7 +55,7 @@ export default function CollegeTable({data,State}) {
       key="tags"
       render={Tager}
     />
-
+  <Column title="College Info" dataIndex="_id" render={ViewDetailBtn}/>
   </Table>
         </div>
     )

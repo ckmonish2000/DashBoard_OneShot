@@ -106,7 +106,7 @@ function App(props) {
  <CoursesChart Courses={Courses}/>
  </div>}
  
-  <CollegeTable data={data} State={FilterState}/>
+  <CollegeTable data={data} State={FilterState} Reset={()=>setFilterState("")}/>
   
     </div>
   );
