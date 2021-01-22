@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateCollege from "./components/createCollege/createCollege"
 import {dburl} from "./components/dburl"
 import Error from "./components/Error/Error"
+import ViewDetails from './components/Details/ViewDetails';
 export default function App() {
   return (
    <main>
@@ -13,6 +14,7 @@ export default function App() {
     <Route path="/createcollege" component={CreateCollege} exact/>
     <Route path="/searchCollege" component={GetCollege} exact/>
     <Route path="/error" component={Error} exact/>
+    <Route path="/details" component={ViewDetails} exact/>
      </Switch>
    </main>
   )

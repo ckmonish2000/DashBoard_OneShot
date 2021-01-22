@@ -2,9 +2,12 @@ import React from 'react'
 import {  Table, Tag, Space, Button  } from "antd"
 import {TableCard} from "./styles"
 import QueueAnim from 'rc-queue-anim';
+import {useHistory} from "react-router-dom"
 
-export default function CollegeTable({data,State,Reset}) {
+export default function CollegeTable(props) {
+    var {data,State,Reset}=props;
     const { Column, ColumnGroup } = Table;
+    const history=useHistory()
  
   if(State!==""){
     data=data.filter(
@@ -33,7 +36,13 @@ export default function CollegeTable({data,State,Reset}) {
 
     let ViewDetailBtn= val=>{
       return(
-      <Button onClick={()=>console.log(val)}>
+      <Button onClick={()=>history.push({
+        pathname:"/details",
+        state:{
+          id:val,
+          data:data
+        }
+      })}>
         View Details
         </Button>)
     }
